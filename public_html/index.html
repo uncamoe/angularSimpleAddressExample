@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+Stephen Nielsen
+uncamoe@gmail.com
+uncamoe.com/portfolio
+-->
+<html ng-app>
+    <head>
+        <title> Angular JS Example Stephen Nielsen - Address Book </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/styles.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body ng-controller="PeopleController">
+        <div class="wrapper" ng-show="formVisibility">
+            <h1>Address Book</h1>
+            <div class="addAContact-form-container">
+                <form name="addContactForm" ng-submit="submitForm(addContactForm.$valid)" novalidate>
+                    <fieldset>
+                        <legend>Add a Contact</legend>
+                        <p>
+                            <label for="name">Name: </label><br>
+                            <input type="text" ng-model="newPerson.name" name="name" id="name" placeholder="First Last" required>
+                            <span ng-show="addContactForm.name.$invalid && !addContactForm.name.$pristine" class="help-block"><br>Name is required.</span>
+                        </p>
+                        <p>
+                            <label for="email">Email: </label><br>
+                            <input type="email" ng-model="newPerson.email" name="email" id="email" placeholder="mail@domain.com" required>
+                            <span ng-show="addContactForm.email.$invalid && !addContactForm.email.$pristine" class="help-block"><br>Email is required.</span>
+                        </p>
+                        <input type="submit" ng-disabled="addContactForm.$invalid" value=" Save "><!--  -->
+                    </fieldset>
+                    
+                </form>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="add-contact-button">
+                <button ng-click="ShowForm()" ng-hide="formVisibility"> Add Contact </button>
+            </div>
+            <div class="contact-item" ng-repeat="person in people | orderBy:'name'">
+                <div class="name">
+                    {{person.name}} - {{person.email}}
+                </div>
+            </div>
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+        <script>
+            window.angular || window.write('<script src="js/libs/angular.js/angular.js" type="text/javascript"><\/script>');
+        </script>
+        <script src="js/controllers/scripts.js" type="text/javascript"></script>
+    </body>
+</html>
